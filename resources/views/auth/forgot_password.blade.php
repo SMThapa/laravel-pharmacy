@@ -42,7 +42,7 @@
                   </div> --}}
 
                   <div class="col-12">
-                    <button class="btn btn-primary w-100" type="submit">Login</button>
+                    <button class="btn btn-primary w-100" type="submit">Send</button>
                   </div>
                   <div class="col-6">
                       <p class="small mb-0">Don't have account?<br> <a class="small" href="{{url('register')}}">Create an account</a></p>
@@ -60,3 +60,5 @@
 
   </div>
 </main><!-- End #main -->
+
+@endsection

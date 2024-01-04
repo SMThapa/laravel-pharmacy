@@ -8,6 +8,7 @@ use Hash;
 use Auth; 
 use Str;
 use Mail;
+use App\Http\Requests\ResetPassword;
 use App\Mail\ForgotPasswordMail;
 use App\Models\User;
 
@@ -55,6 +56,38 @@ class AuthController extends Controller
             return redirect()->back()->with('error', 'Please enter the correct credentials');
         }
     }
+
+    public function getReset($token){
+        // dd($token);
+
+        // if(Auth::check()){
+        //     return redirect('admin/dashboard');
+        // }
+
+        $user = User::where('remember_token', '=', $token);
+        if($user->count() == 0){
+            abort(403);
+        }
+        $user = $user->first();
+        $data['token'] = $token;
+        return view('auth.reset_password', $data);
+    }
+
+    public function postReset($token, ResetPassword $req){
+
+        $user = User::where('remember_token', '=', $token);
+        if($user->count() == 0){
+            abort(403);
+        }
+
+        $user = $user->first();
+        $user->password = Hash::make($req->password);
+        $user->remember_token = Str::random(50);
+        $user->save();
+
+        return redirect('/')->with('success', 'Password has been reset.');
+    }
+
 
     public function logout(){
         Auth::logout();

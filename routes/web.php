@@ -19,10 +19,12 @@ use App\Http\Controllers\DashboardController;
 //auth
 Route::get('login', [AuthController::class, 'login']);
 Route::get('forgot_password', [AuthController::class, 'forgot_password']);
-Route::post('forgot_password_post', [AuthController::class, 'forgot_password_post']);
 Route::get('register', [AuthController::class, 'create_account']);
+Route::get('reset/{token}',[AuthController::class, 'getReset']);
 
+Route::post('forgot_password_post', [AuthController::class, 'forgot_password_post']);
 Route::post('login_post',[AuthController::class, 'login_post']);
+Route::post('reset/{token}',[AuthController::class, 'postReset']);
 
 //admin section
 Route::group(['middleware' => 'admin'],

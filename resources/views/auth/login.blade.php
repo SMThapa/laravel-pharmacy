@@ -68,3 +68,5 @@
     </section>
   </div>
 </main><!-- End #main -->  
+
+@endsection
