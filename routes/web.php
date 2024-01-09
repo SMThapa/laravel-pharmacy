@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CustomerController;
 
 
 /*
@@ -30,6 +31,9 @@ Route::post('reset/{token}',[AuthController::class, 'postReset']);
 Route::group(['middleware' => 'admin'],
     function(){
         Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
+
+        Route::get('admin/customer', [CustomerController::class, 'customer']);
+        Route::get('admin/customer/add', [CustomerController::class, 'addCustomer']);
     }
 );
 
